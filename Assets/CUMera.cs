@@ -1,3 +1,4 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,13 +6,13 @@ using UnityEngine;
 public class CUMera : MonoBehaviour
 {
     public float dumping = 1.5f;
-    public Vector2 offset = new Vector2(2f, 1f);
+    public Vector2 offset = new Vector2(2f, 2f);
     public bool is_left;
     //private Gay TransformPlayer;
     private int last_X;
 
 
-    void start()
+    void Start()
     {
         offset = new Vector2(Mathf.Abs(offset.x), offset.y);
         FindPlayer(is_left);
@@ -29,7 +30,7 @@ public class CUMera : MonoBehaviour
             transform.position = new Vector3(player.position.x + offset.x, player.position.y + offset.y, transform.position.z);
         }
     }
-    void update()
+    void Update()
     {
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
         if(player)
@@ -38,18 +39,63 @@ public class CUMera : MonoBehaviour
 
             if(curent_X > last_X)is_left = false;
             else if(curent_X < last_X)is_left = true;
-            last_X = curent_X;
-            Vector3 target;
+            Vector2 target;
             if(is_left)
             {
-                target = new Vector3(player.position.x - offset.x, player.position.y - offset.y, transform.position.z);
+                target = new Vector2(player.position.x - offset.x, player.position.y - offset.y);
             }
             else
             {
-                target = new Vector3(player.position.x + offset.x, player.position.y + offset.y, transform.position.z);
+                target = new Vector2(player.position.x + offset.x, player.position.y + offset.y);
             }
-            Vector3 curent_p = new Vector3(transform.position.x, target.y, dumping * Time.deltaTime);
+            Vector3 curent_p = new Vector3(target.x, target.y, transform.position.z);
             transform.position = curent_p;
         }
     }
 }
+*/
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Camera.Scripts
+{
+    public class CUMera:MonoBehaviour 
+    {
+    [Header("Parameters")]
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private string playerTag;
+    [SerializeField] [Range(0.5f, 7.5f)] private float movingSpeed = 1.5f;
+
+    private void Awake()
+    {
+        if (this.playerTransform == null)
+        {
+        if (this.playerTag == "")
+        {
+        this.playerTag = "Player";
+        }
+
+        this.playerTransform = GameObject.FindGameObjectWithTag(this.playerTag).transform;
+        }
+
+        this.transform.position = new Vector3()
+        {
+        x=this.playerTransform.position.x, y=this.playerTransform.position.y, z=this.playerTransform.position.z-10};
+        }
+
+        private void Update()
+        {
+        if(this.playerTransform)
+        {
+        Vector3 target = new Vector3() 
+        {
+        x=this.playerTransform.position.x, y=this.playerTransform.position.y, z=this.playerTransform.position.z-10};
+        
+        Vector3 pos = Vector3.Lerp(this.transform.position, target, this.movingSpeed * Time.deltaTime);
+
+        this.transform.position = pos;
+        }
+        }
+    }
+    }
