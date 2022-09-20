@@ -23,7 +23,7 @@ public class GACHI_MUCHI : MonoBehaviour
 
         if (Input.GetKey(KeyCode.S))
         {
-            speed_Y = -0.01f;
+            speed_Y = 0f;
         }
 
         if (Input.GetKey(KeyCode.A))
