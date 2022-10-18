@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         WallJump();
         Dash();
         MaxSpeed();
-        Menu();
+        //Menu();
         MilliAttack();
     }
     void CheckingGround()
@@ -217,6 +217,7 @@ public class PlayerMove : MonoBehaviour
         }
             
     }
+    /*
     void Menu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -224,6 +225,7 @@ public class PlayerMove : MonoBehaviour
             SceneManager.LoadScene("Menu");
         }
     }
+    */
 
     public Transform MilliAttackArea;
     public float MilliRange = 0.5f;
