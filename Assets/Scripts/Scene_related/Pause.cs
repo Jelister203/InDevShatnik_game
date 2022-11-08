@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour {
     public float timer;
     public bool ispuse;
@@ -27,7 +27,7 @@ public class Pause : MonoBehaviour {
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 150f, 150f, 45f), "Продолжить")) {
                 ispuse = false;
                 timer = 0;
-                Cursor.visible = false;
+                //Cursor.visible = false; бля как меня заебало это во время тестов >_<
             }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 100f, 150f, 45f), "Сохранить"))
                 { }
@@ -36,7 +36,7 @@ public class Pause : MonoBehaviour {
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2), 150f, 45f), "В Меню")) {
                 ispuse = false;
                 timer = 0;
-                Application.LoadLevel("Menu");
+                SceneManager.LoadScene("Menu");// то, что было тут - кринж, юзай SceneManager (чекни вторую строку) и этот метод, так грамотнее
             }
         }
     }

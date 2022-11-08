@@ -187,7 +187,7 @@ public class PlayerMove : MonoBehaviour
             blockMoveX = true;
             moveVector.x = 0;
             anim.StopPlayback();
-            anim.Play("Jump"); //вместо Jump будет WallJump
+            anim.Play("Jump"); //пїЅпїЅпїЅпїЅпїЅпїЅ Jump пїЅпїЅпїЅпїЅпїЅ WallJump
             transform.localScale *= new Vector2(-1, 1);
             faceRight = !faceRight;
             rb.gravityScale = gravityDef;
