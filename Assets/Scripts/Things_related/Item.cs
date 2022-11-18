@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public int Damage;
+    public int AttackSpeed;
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "Player")
         {
-            FindObjectOfType<InventoryUI>().AddItem(sprite, gameObject);
+            int[] param = {Damage, AttackSpeed};
+            FindObjectOfType<InventoryUI>().AddItem(sprite, gameObject, param);
         }
     }
     public Sprite sprite;

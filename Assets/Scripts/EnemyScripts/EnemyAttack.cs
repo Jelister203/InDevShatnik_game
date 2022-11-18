@@ -8,7 +8,7 @@ public class EnemyAttack : MonoBehaviour
     public float attackRange = 3f;
     public LayerMask attackMask;
     public int enemyDamage = 25;
-    /*public void enemyAttack()
+    public void enemyAttack()
     {
         Vector3 pos = transform.position;
         pos += transform.right * attackOffset.x;
@@ -16,10 +16,10 @@ public class EnemyAttack : MonoBehaviour
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
         if (colInfo != null)
         {
-            colInfo.GetComponent<PlayerMove>().PlayerTakeDamage(enemyDamage);
+            //colInfo.GetComponent<PlayerMove>().PlayerTakeDamage(enemyDamage);
         }
     }
-    */
+    
 
     private void OnDrawGizmosSelected()
     {
