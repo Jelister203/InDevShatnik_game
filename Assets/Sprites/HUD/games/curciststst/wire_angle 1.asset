@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d387a80ad6fb8f40956101b7534ac06, type: 3}
-  m_Name: Arrow
+  m_Script: {fileID: 11500000, guid: a6acd7f4e288130479e863e07a335601, type: 3}
+  m_Name: wire_angle 1
   m_EditorClassIdentifier: 
-  itemName: Arrow
-  itemIcon: {fileID: 21300000, guid: 952cb5c81ea3a284aafc44b731e430cd, type: 3}
-  isStackable: 1
-  healthRestored: 0
+  itemName: wire-angle-1
+  itemIcon: {fileID: 21300000, guid: 847680a4f1274c64590400bf4aed6efa, type: 3}
+  itemIcon2: {fileID: 0}
+  Anti: 1
+  isRotated: 0
