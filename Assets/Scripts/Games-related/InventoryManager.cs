@@ -6,9 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private GameObject movingItemCursor;
     [SerializeField] private GameObject slotHolder;
-    [SerializeField] private ItemClass[] itemsToAdd;
-    [SerializeField] private ItemClass[] itemsToAddAC;
-    private SlotClass[] items;
+    public SlotClass[] items;
 
     private GameObject[] slots;
     private SlotClass movingSlot;
@@ -16,6 +14,7 @@ public class InventoryManager : MonoBehaviour
     private SlotClass originalSlot;
     private bool isMovingItem;
     public bool isWorking = false;
+    public GameObject Game;
 
     private void Start() {
         slots = new GameObject[slotHolder.transform.childCount];
@@ -26,27 +25,12 @@ public class InventoryManager : MonoBehaviour
         }
         for (int i = 0; i < slotHolder.transform.childCount; i++)
             slots[i] = slotHolder.transform.GetChild(i).gameObject;
-
-        Add(itemsToAdd[3], 0);
-        Add(itemsToAdd[1], 7);
-        Add(itemsToAdd[1], 14);
-        Add(itemsToAdd[5], 21);
-        Add(itemsToAdd[0], 22);
-        Add(itemsToAdd[0], 23);
-        Add(itemsToAdd[0], 24);
-        Add(itemsToAdd[0], 26);
-        Add(itemsToAdd[4], 27);
-        Add(itemsToAdd[1], 13);
-        Add(itemsToAdd[1], 20);
-        Add(itemsToAdd[2], 6);
-
-        foreach (ItemClass item in itemsToAddAC){
-            Add(item);
-        }
-
+        
+        Game.GetComponent<SignalChecker>().Starter();
         RefreshUI();
     }
     private void Update() {
+        Game.GetComponent<SignalChecker>().Updater();
         movingItemCursor.SetActive(isMovingItem);
         movingItemCursor.transform.position = Input.mousePosition;
         if (isMovingItem){
@@ -72,10 +56,6 @@ public class InventoryManager : MonoBehaviour
                 catch{}
             }
         }
-        if (items[25].GetItem() != null){
-        if (items[25].GetItem().name == "rezistor" && items[25].GetItem().isRotated){isWorking = true;}
-        else {isWorking = false;}}
-        else {isWorking = false;}
     }
     #region Invenotry Utils
     public void RefreshUI(){

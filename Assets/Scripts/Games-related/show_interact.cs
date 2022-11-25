@@ -6,6 +6,7 @@ public class show_interact : MonoBehaviour
 {
     public GameObject button;
     public GameObject Panel;
+    public GameObject inventory;
     public Sprite sprite2;
     private Sprite sprite1;
     private Vector2 pos1;
@@ -17,6 +18,7 @@ public class show_interact : MonoBehaviour
         pos1 = gameObject.transform.position;
         pos2 = new Vector2(0.3f, 0f);
         Panel.SetActive(false);
+        inventory.SetActive(false);
     }
     private void OnTriggerEnter2D(Collider2D other) {
         button.SetActive(true);
@@ -31,6 +33,7 @@ public class show_interact : MonoBehaviour
                     gameObject.GetComponent<SpriteRenderer>().sprite = sprite2;
                     gameObject.transform.position = pos1 - pos2;
                     Panel.SetActive(true);
+                    inventory.SetActive(true);
                     GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>().enabled = false;
                     GameObject.FindGameObjectWithTag("Player").GetComponent<Pause>().enabled = false;
                 }
@@ -38,6 +41,7 @@ public class show_interact : MonoBehaviour
                     gameObject.GetComponent<SpriteRenderer>().sprite = sprite1;
                     gameObject.transform.position = pos1;
                     Panel.SetActive(false);
+                    inventory.SetActive(false);
                     GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMove>().enabled = true;
                     GameObject.FindGameObjectWithTag("Player").GetComponent<Pause>().enabled = true;
                 }

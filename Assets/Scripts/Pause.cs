@@ -4,39 +4,37 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour {
     public float timer;
-    public bool ispuse;
-    public bool guipuse;
+    public bool ispause;
+    public bool guipause;
     void Update() {
         Time.timeScale = timer;
-        if (Input.GetKeyDown(KeyCode.Escape) && ispuse == false) {
-            ispuse = true;
+        if (Input.GetKeyDown(KeyCode.Escape) && ispause == false) {
+            ispause = true;
+            guipause = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && ispuse == true) {
-            ispuse = false;
+        else if (Input.GetKeyDown(KeyCode.Escape) && ispause == true) {
+            ispause = false;
+            guipause = false;
         }
-        if (ispuse == true) {
+        if (ispause == true) {
             timer = 0;
-            guipuse = true;
         }
-        else if (ispuse == false) {
+        else if (ispause == false) {
             timer = 1f;
-            guipuse = false;
         }
     }
     public void OnGUI() {
-        if (guipuse == true) {
-            Cursor.visible = true;
+        if (guipause == true) {
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 150f, 150f, 45f), "Продолжить")) {
-                ispuse = false;
+                ispause = false;
                 timer = 0;
-                Cursor.visible = false;
             }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 100f, 150f, 45f), "Сохранить"))
                 { }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 50f, 150f, 45f), "Загрузить"))
                 { }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2), 150f, 45f), "В Меню")) {
-                ispuse = false;
+                ispause = false;
                 timer = 0;
                 SceneManager.LoadScene("Menu");
             }
