@@ -6,10 +6,10 @@ public abstract class ItemClass : ScriptableObject
     [Header("Item")]
     public string itemName;
     public Sprite itemIcon;
-    public bool isStackable = true;
+    public Sprite itemIcon2;
+    public bool Anti = false;
+    public bool isRotated = false;
 
     public abstract ItemClass GetItem();
     public abstract ToolClass GetTool();
-    public abstract MiscClass GetMisc();
-    public abstract ConsumableClass GetConsumable();
 }

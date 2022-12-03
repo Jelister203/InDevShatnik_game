@@ -6,16 +6,15 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private GameObject movingItemCursor;
     [SerializeField] private GameObject slotHolder;
-    [SerializeField] private ItemClass ItemToAdd;
-    [SerializeField] private  ItemClass itemToRemove;
-    [SerializeField] private SlotClass[] startingItems;
-    private SlotClass[] items;
+    public SlotClass[] items;
 
     private GameObject[] slots;
     private SlotClass movingSlot;
     private SlotClass tempSlot;
     private SlotClass originalSlot;
-    bool isMovingItem;
+    private bool isMovingItem;
+    public bool isWorking = false;
+    public GameObject Game;
 
     private void Start() {
         slots = new GameObject[slotHolder.transform.childCount];
@@ -24,16 +23,14 @@ public class InventoryManager : MonoBehaviour
         {
             items[i] = new SlotClass();
         }
-        for (int i = 0; i < startingItems.Length; i++)
-        {
-            items[i] = startingItems[i];
-        }
         for (int i = 0; i < slotHolder.transform.childCount; i++)
             slots[i] = slotHolder.transform.GetChild(i).gameObject;
-        Add(ItemToAdd, 1);
+        
+        Game.GetComponent<SignalChecker>().Starter();
         RefreshUI();
     }
     private void Update() {
+        Game.GetComponent<SignalChecker>().Updater();
         movingItemCursor.SetActive(isMovingItem);
         movingItemCursor.transform.position = Input.mousePosition;
         if (isMovingItem){
@@ -41,14 +38,23 @@ public class InventoryManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0)){
             if(isMovingItem)
-            {
                 EndItemMove();
-            }
             else
                 BeginItemMove();
         }
         if (Input.GetMouseButtonDown(1)){
-            
+            if(isMovingItem){}
+            else{
+                try {
+                originalSlot = GetClosestSlot();
+                Sprite temp = originalSlot.GetItem().itemIcon;
+                originalSlot.GetItem().itemIcon = originalSlot.GetItem().itemIcon2;
+                originalSlot.GetItem().itemIcon2 = temp;
+                originalSlot.GetItem().isRotated = !originalSlot.GetItem().isRotated;
+                RefreshUI();
+                }
+                catch{}
+            }
         }
     }
     #region Invenotry Utils
@@ -57,10 +63,7 @@ public class InventoryManager : MonoBehaviour
             try {
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].GetItem().itemIcon;
-                if (items[i].GetItem().isStackable)
-                    slots[i].transform.GetChild(1).GetComponent<Text>().text = items[i].GetQuantity() + "";
-                else
-                    slots[i].transform.GetChild(1).GetComponent<Text>().text = "";
+                slots[i].transform.GetChild(1).GetComponent<Text>().text = "";
             }
             catch {
                 slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
@@ -69,20 +72,23 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-    public bool Add(ItemClass item, int quantity){
+    public bool Add(ItemClass item){
         SlotClass slot = Contains(item);
-        if (slot != null && slot.GetItem().isStackable){
-        slot.AddQuantity(1);
-        }
-        else {
             for (int i = 0; i < items.Length; i++)
             {
                 if (items[i].GetItem() == null)
                 {
-                    items[i] = new SlotClass(item , quantity);
+                    items[i] = new SlotClass(item);
                     break;
                 }
             }
+        
+        RefreshUI();
+        return true;
+    }
+    public bool Add(ItemClass item, int i){
+        if (items[i].GetItem() == null){
+            items[i] = new SlotClass(item);
         }
         RefreshUI();
         return true;
@@ -90,11 +96,6 @@ public class InventoryManager : MonoBehaviour
     public bool Remove(ItemClass item){
         SlotClass temp = Contains(item);
         if (temp != null){
-            if (temp.GetQuantity() > 1){
-                temp.SubQuantity(1);
-            }
-            else
-            {
                 int slotToRemoveIndex = 0;
                 for (int i = 0; i < items.Length; i++){
                     if (items[i].GetItem() == item){
@@ -103,7 +104,7 @@ public class InventoryManager : MonoBehaviour
                     }
                 }
                 items[slotToRemoveIndex].Clear();
-            }
+            
         }
         else
         {
@@ -141,35 +142,27 @@ public class InventoryManager : MonoBehaviour
         originalSlot = GetClosestSlot();
         if (originalSlot == null)
         {
-            Add(movingSlot.GetItem(), movingSlot.GetQuantity());
+            Add(movingSlot.GetItem());
             movingSlot.Clear();
         }
         else{
         if (originalSlot.GetItem() != null)
         {
-            if (originalSlot.GetItem() == movingSlot.GetItem())
+            if (!originalSlot.GetItem().Anti)
             {
-                if (originalSlot.GetItem().isStackable)
-                {
-                    originalSlot.AddQuantity(movingSlot.GetQuantity());
-                    movingSlot.Clear();
-                }
-                else
-                    return false;
+            tempSlot = new SlotClass(originalSlot);
+            originalSlot.AddItem(movingSlot.GetItem());
+            movingSlot.AddItem(tempSlot.GetItem());
+            RefreshUI();
+            return true;
             }
             else
-            {
-                tempSlot = new SlotClass(originalSlot);
-                originalSlot.AddItem(movingSlot.GetItem(), movingSlot.GetQuantity());
-                movingSlot.AddItem(tempSlot.GetItem(), tempSlot.GetQuantity());
-                //movingSlot.Clear();
-                RefreshUI();
-                return true;
-            }
+                return false;
         }
+        
         else
         {
-            originalSlot.AddItem(movingSlot.GetItem(), movingSlot.GetQuantity());
+            originalSlot.AddItem(movingSlot.GetItem());
             movingSlot.Clear();
         }
         }
@@ -183,7 +176,10 @@ public class InventoryManager : MonoBehaviour
         {
             if (Vector2.Distance(slots[i].transform.position, Input.mousePosition) <= 32)
             {
-                return items[i];
+                if (items[i].GetItem() == null)
+                    return items[i];
+                else if (!items[i].GetItem().Anti)
+                    return items[i];
             }
         }
         return null;
