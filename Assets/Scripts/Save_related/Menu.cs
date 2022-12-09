@@ -11,7 +11,7 @@ public class Menu : MonoBehaviour
     }
     public void PlayPressed()
     {
-        SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene("GYM");
     }
 
     public void TestPressed()

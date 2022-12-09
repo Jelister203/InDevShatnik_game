@@ -20,9 +20,17 @@ namespace SaveLoad.Runtime
     }
 
     public abstract record SaveProfileData { }
-    public record PlayerSaveData : SaveProfileData
+    public record DefaultSave : SaveProfileData
     {
-        public Vector3 position;
+        public GameObject[] dialog;
         public string sceneName;
+        public Vector3 position;
+        public SlotClass[][] items;
     }
+    public record TestSave : SaveProfileData
+    {
+        public string sceneName;
+        public Vector3 position;
+    }
+
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using SaveLoad.Runtime;
+using System.Collections.Generic;
 
 public class Pause : MonoBehaviour {
     public float timer;
@@ -33,17 +34,35 @@ public class Pause : MonoBehaviour {
             }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 100f, 150f, 45f), "Сохранить"))
                 {
-                    var playerSave = new PlayerSaveData{position = gameObject.transform.position, sceneName = SceneManager.GetActiveScene().name};
-                    var SaveProfile = new SaveProfile<PlayerSaveData>("playerSaveData", playerSave);
+                    string title;
+                    GameObject[] newDialogs;
+                    Vector3 pos;
+                    SlotClass[][] items;
+
+                    InventoryManager[] exItems = FindObjectsOfType<InventoryManager>();
+                    title = SceneManager.GetActiveScene().name;
+                    pos = FindObjectOfType<PlayerMove>().transform.position;
+                    var dialogs = FindObjectsOfType<DialogManager>();
+                    newDialogs = new GameObject[dialogs.Length];
+                    items = new SlotClass[exItems.Length][];
+                    for (int i = 0; i < exItems.Length; i++) {
+                        items[i] = exItems[i].items;
+                    }
+                    for (int i = 0; i < dialogs.Length; i++) {
+                        newDialogs[i] = dialogs[i].gameObject;
+                    }
+                    var sceneSave = new DefaultSave{position = pos, sceneName = title, dialog = newDialogs, items = items};
+                    var SaveProfile = new SaveProfile<DefaultSave>(SceneManager.GetActiveScene().name, sceneSave);
                     SaveManager.Save(SaveProfile);
                 }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 50f, 150f, 45f), "Загрузить"))
                 {
-                    var data = SaveManager.Load<PlayerSaveData>("playerSaveData").saveData;
+                    string title = SceneManager.GetActiveScene().name;
+                    var data = SaveManager.Load<DefaultSave>(SceneManager.GetActiveScene().name).saveData;
                     SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-                    Debug.Log(data.sceneName);
+                    SlotClass[][] items = data.items;
                     SceneManager.LoadSceneAsync(data.sceneName);
-                    transform.position = data.position;
+                    FindObjectOfType<PlayerMove>().gameObject.transform.position = data.position;
                 }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2), 150f, 45f), "В Меню")) {
                 ispause = false;
