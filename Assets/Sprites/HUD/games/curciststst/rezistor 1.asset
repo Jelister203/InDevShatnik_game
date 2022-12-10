@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: rezistor 1
   m_EditorClassIdentifier: 
   itemName: rezistor2
-  itemIcon: {fileID: 21300000, guid: d10c7ddab71169d4692bde6b4a34542b, type: 3}
-  itemIcon2: {fileID: 21300000, guid: 4639a0f418fbafb499d67d475fae06d8, type: 3}
+  vertical: {fileID: 21300000, guid: 4639a0f418fbafb499d67d475fae06d8, type: 3}
+  horizontal: {fileID: 21300000, guid: d10c7ddab71169d4692bde6b4a34542b, type: 3}
+  curent: {fileID: 21300000, guid: d10c7ddab71169d4692bde6b4a34542b, type: 3}
   Anti: 0
   isRotated: 0

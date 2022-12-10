@@ -66,6 +66,8 @@ namespace Camera.Scripts
     [SerializeField] private Transform playerTransform;
     [SerializeField] private string playerTag;
     [SerializeField] [Range(0.5f, 7.5f)] private float movingSpeed = 1.5f;
+    [SerializeField] private int x_min = 0;
+    [SerializeField] private int x_max = 20;
 
     private void Awake()
     {
@@ -81,7 +83,7 @@ namespace Camera.Scripts
 
         this.transform.position = new Vector3()
         {
-        x=this.playerTransform.position.x, y=this.playerTransform.position.y, z=this.playerTransform.position.z-10};
+        x=this.playerTransform.position.x, y=this.transform.position.y, z=this.playerTransform.position.z-10};
         }
 
         private void Update()
@@ -90,11 +92,17 @@ namespace Camera.Scripts
         {
         Vector3 target = new Vector3() 
         {
-        x=this.playerTransform.position.x, y=this.playerTransform.position.y, z=this.playerTransform.position.z-10};
+        x=this.playerTransform.position.x, y=this.transform.position.y, z=this.playerTransform.position.z-10};
         
         Vector3 pos = Vector3.Lerp(this.transform.position, target, this.movingSpeed * Time.deltaTime);
 
         this.transform.position = pos;
+        if (transform.position.x < x_min) {
+            transform.position = new Vector3(x_min, transform.position.y, transform.position.z);
+        }
+        else if (transform.position.x > x_max) {
+            transform.position = new Vector3(x_max, transform.position.y, transform.position.z);
+        }
         }
         }
     }

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: wire-horizontal
   m_EditorClassIdentifier: 
   itemName: wire-horizontal
-  itemIcon: {fileID: 21300000, guid: af583da7cfa69f84a8e2bfba969c8c33, type: 3}
-  itemIcon2: {fileID: 0}
+  vertical: {fileID: 21300000, guid: af583da7cfa69f84a8e2bfba969c8c33, type: 3}
+  horizontal: {fileID: 21300000, guid: af583da7cfa69f84a8e2bfba969c8c33, type: 3}
+  curent: {fileID: 21300000, guid: af583da7cfa69f84a8e2bfba969c8c33, type: 3}
   Anti: 1
   isRotated: 0

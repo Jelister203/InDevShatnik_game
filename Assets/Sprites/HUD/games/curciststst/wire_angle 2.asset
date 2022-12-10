@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: wire_angle 2
   m_EditorClassIdentifier: 
   itemName: vire-angle-2
-  itemIcon: {fileID: 21300000, guid: 849012edaff85f548bcf9aa3dcb2cb08, type: 3}
-  itemIcon2: {fileID: 0}
+  vertical: {fileID: 21300000, guid: 849012edaff85f548bcf9aa3dcb2cb08, type: 3}
+  horizontal: {fileID: 21300000, guid: 849012edaff85f548bcf9aa3dcb2cb08, type: 3}
+  curent: {fileID: 21300000, guid: 849012edaff85f548bcf9aa3dcb2cb08, type: 3}
   Anti: 1
   isRotated: 0

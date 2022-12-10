@@ -20,7 +20,7 @@ public class show_interact : MonoBehaviour
         Panel.SetActive(false);
         inventory.SetActive(false);
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerStay2D(Collider2D other) {
         button.SetActive(true);
     }
     private void OnTriggerExit2D(Collider2D other) {

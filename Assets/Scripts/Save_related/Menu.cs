@@ -11,12 +11,12 @@ public class Menu : MonoBehaviour
     }
     public void PlayPressed()
     {
-        SceneManager.LoadScene("Level_1");
+        SceneManager.LoadScene("GYM");
     }
 
     public void TestPressed()
     {
-        SceneManager.LoadScene("SampleScene");
+        //SceneManager.LoadScene("SampleScene");
     }
     public void ExitPressed()
     {

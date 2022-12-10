@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class SignalChecker : MonoBehaviour
 {
-    [SerializeField] private GameObject inventory;
+    [SerializeField] public GameObject inventory;
     
     [SerializeField] private GameObject objectToDisable;
     private SlotClass[] items;
@@ -16,12 +16,13 @@ public class SignalChecker : MonoBehaviour
     [System.Serializable] public class SubList {
     public int x;
     public int y;
-}
+    }
 
 
 [SerializeField] private ItemClass[] itemsToAdd;
 public List<SubList> indexes = new List<SubList>();
 public List<ACList> ACs = new List<ACList>();
+
     public void Updater()
     {
         if (inventory.GetComponent<InventoryManager>().isWorking){
@@ -72,5 +73,24 @@ public List<ACList> ACs = new List<ACList>();
             ItemClass item = ACs[i].itemsToAddAC;
             inventory.GetComponent<InventoryManager>().Add(item);
         }
+    }
+    public void SolvePuzle(){
+        inventory.GetComponent<InventoryManager>().Start();
+        for (int i = 0; i < ACs.Count; i++){
+            ItemClass item = ACs[i].itemsToAddAC;
+
+            inventory.GetComponent<InventoryManager>().Remove(item);
+            if (item.isRotated != ACs[i].rotation){
+                if (item.isRotated){
+                    item.curent = item.horizontal;
+                }
+                else{
+                    item.curent = item.vertical;
+                }
+                item.isRotated = !item.isRotated;}
+            inventory.GetComponent<InventoryManager>().Add(item, ACs[i].item_id);
+        }
+        Updater();
+        inventory.GetComponent<InventoryManager>().Update();
     }
 }
