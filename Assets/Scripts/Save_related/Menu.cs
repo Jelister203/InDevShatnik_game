@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
 
     public void TestPressed()
     {
-        SceneManager.LoadScene("SampleScene");
+        //SceneManager.LoadScene("SampleScene");
     }
     public void ExitPressed()
     {

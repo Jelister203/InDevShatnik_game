@@ -6,9 +6,9 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private GameObject movingItemCursor;
     [SerializeField] private GameObject slotHolder;
-    public SlotClass[] items;
+    public SlotClass[] items = null;
 
-    private GameObject[] slots;
+    private GameObject[] slots = null;
     private SlotClass movingSlot;
     private SlotClass tempSlot;
     private SlotClass originalSlot;
@@ -16,25 +16,27 @@ public class InventoryManager : MonoBehaviour
     public bool isWorking = false;
     public GameObject Game;
 
-    private void Start() {
-        slots = new GameObject[slotHolder.transform.childCount];
-        items = new SlotClass[slots.Length];
-        for (int i = 0; i < slotHolder.transform.childCount; i++)
-        {
-            items[i] = new SlotClass();
-        }
-        for (int i = 0; i < slotHolder.transform.childCount; i++)
-            slots[i] = slotHolder.transform.GetChild(i).gameObject;
-        
+    public void Start() {
+        if (!isWorking){
+            slots = new GameObject[slotHolder.transform.childCount];
+            for (int i = 0; i < slotHolder.transform.childCount; i++)
+            {
+                slots[i] = slotHolder.transform.GetChild(i).gameObject;
+            }
+            items = new SlotClass[slots.Length];
+            for (int i = 0; i < slotHolder.transform.childCount; i++)
+            {
+                items[i] = new SlotClass();
+            }
         Game.GetComponent<SignalChecker>().Starter();
-        RefreshUI();
+        RefreshUI();}
     }
-    private void Update() {
+    public void Update() {
         Game.GetComponent<SignalChecker>().Updater();
         movingItemCursor.SetActive(isMovingItem);
         movingItemCursor.transform.position = Input.mousePosition;
         if (isMovingItem){
-        movingItemCursor.GetComponent<Image>().sprite = movingSlot.GetItem().itemIcon;
+        movingItemCursor.GetComponent<Image>().sprite = movingSlot.GetItem().curent;
         }
         if (Input.GetMouseButtonDown(0)){
             if(isMovingItem)
@@ -47,22 +49,34 @@ public class InventoryManager : MonoBehaviour
             else{
                 try {
                 originalSlot = GetClosestSlot();
+                    rotateFunc(originalSlot);
+                /*
                 Sprite temp = originalSlot.GetItem().itemIcon;
                 originalSlot.GetItem().itemIcon = originalSlot.GetItem().itemIcon2;
                 originalSlot.GetItem().itemIcon2 = temp;
-                originalSlot.GetItem().isRotated = !originalSlot.GetItem().isRotated;
+                originalSlot.GetItem().isRotated = !originalSlot.GetItem().isRotated;*/
                 RefreshUI();
                 }
                 catch{}
             }
         }
     }
+    public void rotateFunc(SlotClass originalSlot)
+    {
+                if (originalSlot.GetItem().isRotated){
+                    originalSlot.GetItem().curent = originalSlot.GetItem().horizontal;
+                }
+                else{
+                    originalSlot.GetItem().curent = originalSlot.GetItem().vertical;
+                }
+                originalSlot.GetItem().isRotated = !originalSlot.GetItem().isRotated;
+    }
     #region Invenotry Utils
     public void RefreshUI(){
         for (int i = 0; i < slots.Length; i++){
             try {
                 slots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].GetItem().itemIcon;
+                slots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].GetItem().curent;
                 slots[i].transform.GetChild(1).GetComponent<Text>().text = "";
             }
             catch {
@@ -183,6 +197,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return null;
-    }
+    } 
     #endregion Moving Stuff
 }

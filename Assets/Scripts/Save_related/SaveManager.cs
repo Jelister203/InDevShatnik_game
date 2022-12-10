@@ -15,9 +15,17 @@ namespace SaveLoad.Runtime
             File.Delete($"{saveFolder}/{profileName}");
         }
         public static SaveProfile<T> Load<T>(string profileName) where T : SaveProfileData {
+            try {
             var fileContents = File.ReadAllText($"{saveFolder}/{profileName}");
             //decrypt
             return JsonConvert.DeserializeObject<SaveProfile<T>>(fileContents);
+            }
+            catch {
+            var sceneSave = new TestSave{position = new UnityEngine.Vector3(999,999,999), sceneName = "Empty"};
+            var SaveProfile = new SaveProfile<TestSave>("Empty", sceneSave);
+            SaveManager.Save(SaveProfile);
+                return JsonConvert.DeserializeObject<SaveProfile<T>>(File.ReadAllText($"{saveFolder}/Empty"));
+            }
         }
 
         public static void Save<T>(SaveProfile<T> save) where T : SaveProfileData

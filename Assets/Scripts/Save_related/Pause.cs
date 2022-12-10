@@ -34,35 +34,34 @@ public class Pause : MonoBehaviour {
             }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 100f, 150f, 45f), "Сохранить"))
                 {
-                    string title;
-                    GameObject[] newDialogs;
-                    Vector3 pos;
-                    SlotClass[][] items;
+        string title;
+        string[] newDialogs;
+        Vector3 pos;
+        bool[] items;
 
-                    InventoryManager[] exItems = FindObjectsOfType<InventoryManager>();
-                    title = SceneManager.GetActiveScene().name;
-                    pos = FindObjectOfType<PlayerMove>().transform.position;
-                    var dialogs = FindObjectsOfType<DialogManager>();
-                    newDialogs = new GameObject[dialogs.Length];
-                    items = new SlotClass[exItems.Length][];
-                    for (int i = 0; i < exItems.Length; i++) {
-                        items[i] = exItems[i].items;
-                    }
-                    for (int i = 0; i < dialogs.Length; i++) {
-                        newDialogs[i] = dialogs[i].gameObject;
-                    }
-                    var sceneSave = new DefaultSave{position = pos, sceneName = title, dialog = newDialogs, items = items};
-                    var SaveProfile = new SaveProfile<DefaultSave>(SceneManager.GetActiveScene().name, sceneSave);
-                    SaveManager.Save(SaveProfile);
+        SignalChecker[] exItems = FindObjectsOfType<SignalChecker>();
+        title = SceneManager.GetActiveScene().name;
+        pos = FindObjectOfType<PlayerMove>().transform.position;
+        var dialogs = FindObjectsOfType<DialogManager>();
+        newDialogs = new string[dialogs.Length];
+        items = new bool[exItems.Length];
+        for (int i = 0; i < exItems.Length; i++) {
+            items[i] = exItems[i].inventory.GetComponent<InventoryManager>().isWorking;
+        }
+        for (int i = 0; i < dialogs.Length; i++) {
+            newDialogs[i] = dialogs[i].finalMessage.name;
+        }
+        var sceneSave = new DefaultSave{position = pos, sceneName = title, dialogs = newDialogs, items = items};
+        var SaveProfile = new SaveProfile<DefaultSave>(SceneManager.GetActiveScene().name, sceneSave);
+        SaveManager.Save(SaveProfile);
+        var etySave = new TestSave{position = new Vector3(999,999,999), sceneName = SceneManager.GetActiveScene().name};
+        var etySaveProf = new SaveProfile<TestSave>("Empty", etySave);
+        SaveManager.Save(etySaveProf);
                 }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 50f, 150f, 45f), "Загрузить"))
                 {
-                    string title = SceneManager.GetActiveScene().name;
-                    var data = SaveManager.Load<DefaultSave>(SceneManager.GetActiveScene().name).saveData;
-                    SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-                    SlotClass[][] items = data.items;
-                    SceneManager.LoadSceneAsync(data.sceneName);
-                    FindObjectOfType<PlayerMove>().gameObject.transform.position = data.position;
+                var data = SaveManager.Load<DefaultSave>("Empty").saveData;
+                SceneManager.LoadScene(data.sceneName);
                 }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2), 150f, 45f), "В Меню")) {
                 ispause = false;

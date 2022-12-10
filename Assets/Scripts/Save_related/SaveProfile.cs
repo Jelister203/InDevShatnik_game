@@ -22,10 +22,10 @@ namespace SaveLoad.Runtime
     public abstract record SaveProfileData { }
     public record DefaultSave : SaveProfileData
     {
-        public GameObject[] dialog;
+        public string[] dialogs;
         public string sceneName;
         public Vector3 position;
-        public SlotClass[][] items;
+        public bool[] items;
     }
     public record TestSave : SaveProfileData
     {

@@ -5,8 +5,9 @@ public abstract class ItemClass : ScriptableObject
 {
     [Header("Item")]
     public string itemName;
-    public Sprite itemIcon;
-    public Sprite itemIcon2;
+    public Sprite vertical;
+    public Sprite horizontal;
+    public Sprite curent;
     public bool Anti = false;
     public bool isRotated = false;
 
