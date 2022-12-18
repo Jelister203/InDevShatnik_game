@@ -13,20 +13,23 @@ EditorBuildSettings:
     guid: dc061b2f2115960429d5d14bced249ef
   - enabled: 1
     path: Assets/Scenes/corridor.unity
-    guid: 37478bb649dd5d042bf658723649afbc
-  - enabled: 1
-    path: Assets/Scenes/lift.unity
-    guid: af249b7db7746c448af16aaf109618eb
-  - enabled: 1
-    path: Assets/Scenes/stairs.unity
-    guid: fea8a026abcac044da8e08b48331ca80
-  - enabled: 1
-    path: Assets/Scenes/PE_Class.unity
-    guid: 4533b2712ef4d5741a99014877188c68
-  - enabled: 1
-    path: Assets/Scenes/basemant.unity
-    guid: ea94d83c905516844860446e59709da9
+    guid: 1b7568eddc3a3e14aa14f0ba9e2594d5
   - enabled: 1
     path: Assets/Scenes/GYM.unity
+    guid: 4533b2712ef4d5741a99014877188c68
+  - enabled: 1
+    path: Assets/Scenes/lift.unity
+    guid: 6197ba1b1c27e91419a3a5cbc1a283d9
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 3df9b20d89b7cec4fb1f5af33d128cd9
+  - enabled: 1
+    path: Assets/Scenes/PE_Class.unity
     guid: 37e22a533bc4bca4cb762872fcfb583d
+  - enabled: 1
+    path: Assets/Scenes/stairs.unity
+    guid: 9a6e2c8bcfcef1546b7c8a8ce079f88a
+  - enabled: 1
+    path: Assets/Scenes/under.unity
+    guid: fc94a928992f3aa4e81fc38262e7fdf4
   m_configObjects: {}
