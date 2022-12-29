@@ -1,12 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/TimeLine/worker2Timeline.playable.meta
 guid: 77dcb2bbf9cf46c46bcccb0df307a488
-========
-guid: 422ae14102dbf27478c88fd290a26358
->>>>>>>> ee58a62ec2d8c4d71b4b0d28dca11b1bb88b5da1:Assets/Animation/Image (1).controller.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 9100000
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

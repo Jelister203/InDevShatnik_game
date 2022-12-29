@@ -43,7 +43,6 @@ public class MovingNextLevel : MonoBehaviour
         {
             if (reallyimportantshit == null)
             {
-<<<<<<< HEAD
                 if (invBoolIndexes.Length == 0 || boolIndexesCheck())
                 {
                     GetComponent<AudioSource>().PlayOneShot(soundsopen_AR[Random.Range(0, soundsopen_AR.Length - 1)]);
@@ -60,20 +59,6 @@ public class MovingNextLevel : MonoBehaviour
                     SceneManager.LoadSceneAsync(sceneToLoad + " 1");
                 }
             }
-=======
-                if (invBoolIndexes.Length == 0 || boolIndexesCheck()){
-                if (!SceneManager.GetActiveScene().name.Contains("do_not_save"))
-                {
-                    Saver();
-                }
-                widget.transform.GetChild(1).gameObject.SetActive(true);// animation
-                Invoke("nextDoor", 1f);// epta
-            }
-                else{
-                    sceneToLoad = sceneToLoad+" (another)";
-                }
-            }
->>>>>>> ee58a62ec2d8c4d71b4b0d28dca11b1bb88b5da1
             else
             {
             if (messagePanel!=null)
