@@ -60,8 +60,24 @@ public class Pause : MonoBehaviour {
                 }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2) - 50f, 150f, 45f), "Загрузить"))
                 {
-                var data = SaveManager.Load<DefaultSave>("Empty").saveData;
-                SceneManager.LoadScene(data.sceneName);
+                    string sceneName = "PE_Class 1 (do_not_save)";
+        try
+        {
+            var data = SaveManager.Load<TestSave>("Empty").saveData;
+            if (data.sceneName != "Empty"){
+                SceneManager.LoadSceneAsync(data.sceneName);
+            }
+            else{
+            SaveManager.Drop();
+            SceneManager.LoadScene(sceneName);
+            }
+        }
+            
+        catch
+        {
+            SaveManager.Drop();
+            SceneManager.LoadScene(sceneName);
+        }
                 }
             if (GUI.Button(new Rect((float)(Screen.width / 2), (float)(Screen.height / 2), 150f, 45f), "В Меню")) {
                 ispause = false;

@@ -5,6 +5,7 @@ public class SignalChecker : MonoBehaviour
     [SerializeField] public GameObject inventory;
     
     [SerializeField] private GameObject objectToDisable;
+    [SerializeField] private bool howDisable = true;
     private SlotClass[] items;
     [System.Serializable] public class ACList {
     public ItemClass itemsToAddAC;
@@ -26,12 +27,12 @@ public List<ACList> ACs = new List<ACList>();
     public void Updater()
     {
         if (inventory.GetComponent<InventoryManager>().isWorking){
-            objectToDisable.GetComponent<SpriteRenderer>().enabled = false;
-            objectToDisable.GetComponent<BoxCollider2D>().enabled = false;
+            objectToDisable.GetComponent<SpriteRenderer>().enabled = !howDisable;
+            objectToDisable.GetComponent<BoxCollider2D>().enabled = !howDisable;
         }
         else{
-        objectToDisable.GetComponent<SpriteRenderer>().enabled = true;
-        objectToDisable.GetComponent<BoxCollider2D>().enabled = true;
+        objectToDisable.GetComponent<SpriteRenderer>().enabled = howDisable;
+        objectToDisable.GetComponent<BoxCollider2D>().enabled = howDisable;
         }
         for (int i = 0; i < ACs.Count; i++){
             if (items[ACs[i].item_id].GetItem() != null){

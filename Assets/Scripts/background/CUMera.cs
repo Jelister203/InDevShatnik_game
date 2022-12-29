@@ -84,7 +84,7 @@ namespace Camera.Scripts
 
         this.transform.position = new Vector3()
         {
-        x=this.playerTransform.position.x, y=y_freeze, z=this.playerTransform.position.z-10};
+        x=this.playerTransform.position.x, y=y_freeze, z=this.playerTransform.position.z};
         }
 
         private void Update()

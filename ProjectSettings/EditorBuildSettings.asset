@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/DEPRECATED/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Level_1.unity
+    path: Assets/Scenes/DEPRECATED/DEPRECATED.unity
     guid: dc061b2f2115960429d5d14bced249ef
   - enabled: 1
     path: Assets/Scenes/corridor.unity
@@ -18,18 +18,33 @@ EditorBuildSettings:
     path: Assets/Scenes/GYM.unity
     guid: 4533b2712ef4d5741a99014877188c68
   - enabled: 1
+    path: Assets/Scenes/Basemant.unity
+    guid: a9d43bd949bd5504a812245d1cf20822
+  - enabled: 1
     path: Assets/Scenes/lift.unity
     guid: 6197ba1b1c27e91419a3a5cbc1a283d9
+  - enabled: 1
+    path: Assets/Scenes/Basemant 1.unity
+    guid: dc5b48ebbad9acc4486bf641f301ef31
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 3df9b20d89b7cec4fb1f5af33d128cd9
   - enabled: 1
-    path: Assets/Scenes/PE_Class.unity
-    guid: 37e22a533bc4bca4cb762872fcfb583d
+    path: Assets/Scenes/PE_Class 1 (do_not_save).unity
+    guid: 090e9da93cfec2c4db88ffa8ee53b567
+  - enabled: 1
+    path: Assets/Scenes/stairs 1.unity
+    guid: fc63bc66030056945b6cd93b82f245ee
   - enabled: 1
     path: Assets/Scenes/stairs.unity
     guid: 9a6e2c8bcfcef1546b7c8a8ce079f88a
   - enabled: 1
     path: Assets/Scenes/under.unity
     guid: fc94a928992f3aa4e81fc38262e7fdf4
+  - enabled: 1
+    path: Assets/Scenes/PE_Class.unity
+    guid: 7780ef3a0fc845d4c83e6daa51871dcc
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

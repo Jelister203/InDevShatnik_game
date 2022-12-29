@@ -41,5 +41,12 @@ namespace SaveLoad.Runtime
             }
             File.WriteAllText($"{saveFolder}/{save.name}", jsonString);
         }
+        public static void Drop(){
+            var dir = new DirectoryInfo(saveFolder);
+            try{
+                dir.Delete(true);
+            }
+            catch{}
+        }
     }
 }

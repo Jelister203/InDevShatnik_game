@@ -32,5 +32,9 @@ namespace SaveLoad.Runtime
         public string sceneName;
         public Vector3 position;
     }
+    public record ThingsSave : SaveProfileData
+    {
+        public bool[] inventory;
+    }
 
 }
